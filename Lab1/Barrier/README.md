@@ -4,7 +4,7 @@
 - Go 1.27+
 
 ## How to run
-- Ensure you are in Lab1/ directory `cd Lab1/`
+- Ensure you are in Lab1/Barrier directory `cd Lab1/Barrier`
 - Run the command `go run rendezvous.go` to run the rendezvous program
 - Run the command `go run barrier.go` to run the barrier program
 
