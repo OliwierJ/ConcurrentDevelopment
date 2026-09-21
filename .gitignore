@@ -1,3 +1,5 @@
-/Lab1/*.o
+/Lab1(cpp)/*.o
 /Lab1(cpp)/helloThreads
+/Lab1(cpp)/mutualEx
 .vscode/
+.idea/
