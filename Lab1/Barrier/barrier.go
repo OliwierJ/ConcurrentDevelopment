@@ -1,5 +1,5 @@
 //Barrier.go
-//Copyright (C) 2024 Dr. Joseph Kehoe
+//Copyright (C) 2026 Oliwier Jakubiec
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,10 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //--------------------------------------------
-// Author: Joseph Kehoe (Joseph.Kehoe@setu.ie)
-// Created on 30/9/2024
-// Modified by: Oliwier Jakubiec
-// Help Recieved : Mykhailo Balaker
+// Author: Oliwier Jakubiec
+// Created on 21/09/2026
+// Title: Barrier example
+// Purpose: Demonstrate how a channels can be used to create a barrier between `n` threads
+// Help Received : Mykhailo Balaker
 //--------------------------------------------
 
 package main
