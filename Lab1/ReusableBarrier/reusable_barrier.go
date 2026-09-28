@@ -1,5 +1,5 @@
 //reusable_barrier.go
-//Copyright (C) 2024 Dr. Joseph Kehoe
+//Copyright (C) 2026 Oliwier Jakubiec
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 //--------------------------------------------
 // Author: Oliwier Jakubiec
-// Created on 30/9/2024
+// Created on 25/9/2026
 //--------------------------------------------
 
 package main
@@ -24,7 +24,6 @@ package main
 import (
 	"fmt"
 	"sync"
-	"time"
 )
 
 const totalRoutines = 5
@@ -34,7 +33,6 @@ func doStuffReusable(goNum int, wg *sync.WaitGroup, channel *chan struct{}, lock
 
 	for i := 0; i < 3; i++ {
 
-		time.Sleep(time.Second)
 		fmt.Printf("Part A Loop %d, Thread %d\n", i, goNum)
 
 		// Wait here until everyone has completed part A
@@ -43,7 +41,7 @@ func doStuffReusable(goNum int, wg *sync.WaitGroup, channel *chan struct{}, lock
 		// If every thread has passed through
 		if *counter == 0 {
 			lock.Unlock()
-			fmt.Println("All threads have reached barrier")
+			fmt.Println("All threads have reached barrier A")
 			close(*channel) // close the channel to release all the threads
 			// Reset barrier
 			*channel = make(chan struct{})
@@ -53,9 +51,25 @@ func doStuffReusable(goNum int, wg *sync.WaitGroup, channel *chan struct{}, lock
 			lock.Unlock()
 			<-*channel // Wait for the channel to close
 		}
-		time.Sleep(time.Second)
 
 		fmt.Printf("Part B Loop %d, Thread %d\n", i, goNum)
+
+		// Wait here until everyone has completed part A
+		lock.Lock()
+		*counter-- // decrement counter
+		// If every thread has passed through
+		if *counter == 0 {
+			lock.Unlock()
+			fmt.Println("All threads have reached barrier B")
+			close(*channel) // close the channel to release all the threads
+			// Reset barrier
+			*channel = make(chan struct{})
+			*counter = totalRoutines
+
+		} else {
+			lock.Unlock()
+			<-*channel // Wait for the channel to close
+		}
 
 	}
 	wg.Done() // Notify the waitgroup
